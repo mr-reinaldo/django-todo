@@ -15,7 +15,7 @@ spec:
         app: django-todo
     spec:
       containers:
-        - image: django-todo:latest
+        - image: django-todo:v1.0.0
           name: django-todo
           imagePullPolicy: Never
           resources:

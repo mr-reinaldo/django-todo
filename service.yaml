@@ -5,6 +5,7 @@ metadata:
     app: django-todo
   name: django-todo
 spec:
+  type: NodePort
   ports:
     - port: 80
       protocol: TCP
