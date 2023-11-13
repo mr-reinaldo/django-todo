@@ -1,15 +1,20 @@
-FROM python:3
+FROM python:3.11-bullseye
 
-WORKDIR /data
+ENV PYTHONUNBUFFERED=1
 
-RUN pip install django==3.2
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    sqlite3 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip && pip install django
 
 COPY . .
 
-RUN python manage.py migrate
+RUN python manage.py makemigrations && python manage.py migrate
 
 EXPOSE 8000
 
-CMD ["python","manage.py","runserver","0.0.0.0:8000"]
-
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 

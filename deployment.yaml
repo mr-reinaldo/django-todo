@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: django-todo
+  name: django-todo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-todo
+  template:
+    metadata:
+      labels:
+        app: django-todo
+    spec:
+      containers:
+        - image: django-todo:latest
+          name: django-todo
+          imagePullPolicy: Never
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
